@@ -38,14 +38,6 @@ public final class CommentedConfiguration extends YamlConfiguration {
      */
     private boolean creationFailure = false;
 
-    public CommentedConfiguration() {
-        try {
-            // We don't want the YAML to parse comments at all.
-            this.options().parseComments(false);
-        } catch (Throwable ignored) {
-        }
-    }
-
     /**
      * Sync the config with another resource.
      * This method can be used as an auto updater for your config files.

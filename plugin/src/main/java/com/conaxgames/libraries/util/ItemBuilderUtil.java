@@ -3,9 +3,12 @@ package com.conaxgames.libraries.util;
 import com.cryptomorin.xseries.XMaterial;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import net.minecraft.server.v1_8_R3.NBTTagByte;
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -216,17 +219,21 @@ public class ItemBuilderUtil {
     }
 
     public ItemBuilderUtil setUnbreakable() {
-        final ItemMeta meta = this.is.getItemMeta();
-        if (meta != null) {
-            setUnbreakable(meta, true); // Your version-agnostic method
-        }
-        this.is.setItemMeta(meta);
-        return this;
-    }
+        if (is == null) return this;
 
-    public static ItemMeta setUnbreakable(ItemMeta meta, boolean value) {
-        meta.setUnbreakable(value); // Default behavior (1.20 NMS)
-        return meta;
+        ItemStack item = this.is;
+        net.minecraft.server.v1_8_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+        NBTTagCompound tag = nmsItem.hasTag() ? nmsItem.getTag() : new NBTTagCompound();
+        tag.setBoolean("Unbreakable", true);
+        nmsItem.setTag(tag);
+
+        ItemStack unbreakableItem = CraftItemStack.asBukkitCopy(nmsItem);
+        ItemMeta meta = unbreakableItem.getItemMeta();
+        if (meta != null) {
+            this.is.setItemMeta(meta);
+        }
+
+        return this;
     }
 
     public ItemBuilderUtil setFlags(ItemFlag... flags) {
@@ -252,17 +259,8 @@ public class ItemBuilderUtil {
         return this;
     }
 
-    public ItemBuilderUtil setCustomModelData(int modelData) {
-        final ItemMeta meta = this.is.getItemMeta();
-        if (meta != null) {
-            meta.setCustomModelData(modelData);
-        }
-        this.is.setItemMeta(meta);
-        return this;
-    }
-
     public ItemBuilderUtil setSkin(String texture) {
-        if (is.getType() == Material.PLAYER_HEAD) {
+        if (is.equals(new ItemStack(Material.SKULL_ITEM, 1, (short) 3))) {
             final SkullMeta meta = (SkullMeta) is.getItemMeta();
             if (meta != null) {
                 GameProfile profile = new GameProfile(UUID.randomUUID(), null);

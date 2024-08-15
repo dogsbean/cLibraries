@@ -153,7 +153,7 @@ public class CoreButtonProcessor {
 
                 case "EMPTY_INVENTORY": {
                     if (type.equalsIgnoreCase("EMPTY_INVENTORY")) {
-                        if (!player.getInventory().isEmpty())
+                        if (player.getInventory().getContents() != null)
                             denial.set(new CoreProcessorDenial(CC.RED + "You need an empty inventory to use this..."));
                     }
                     break;

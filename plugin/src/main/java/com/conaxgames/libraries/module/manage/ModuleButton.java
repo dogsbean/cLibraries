@@ -53,7 +53,7 @@ public class ModuleButton extends Button {
 
     @Override
     public Material getMaterial(Player var1) {
-        return (this.enabled ? Material.LIME_DYE : Material.RED_DYE);
+        return (this.enabled ? Material.EMERALD_BLOCK : Material.REDSTONE_BLOCK);
     }
 
     @Override

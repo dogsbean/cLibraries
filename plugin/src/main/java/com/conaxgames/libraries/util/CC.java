@@ -118,7 +118,7 @@ public final class CC {
 		Matcher hexMatcher = hexPattern.matcher(message);
 		while (hexMatcher.find()) {
 			String hexColor = hexMatcher.group().substring(2); // Remove "&#"
-			message = message.replace(hexMatcher.group(), net.md_5.bungee.api.ChatColor.of("#" + hexColor).toString());
+			message = message.replace(hexMatcher.group(), ChatColor.valueOf("#" + hexColor).toString());
 		}
 
 		return message; // Your default implementation (1.8 NMS behavior)
