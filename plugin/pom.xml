@@ -30,6 +30,10 @@
             <url>https://repo.codemc.io/repository/nms/</url>
         </repository>
         <repository>
+            <id>viaversion-repo</id>
+            <url>https://repo.viaversion.com</url>
+        </repository>
+        <repository>
             <id>bungeecord-repo</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
@@ -45,9 +49,25 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.20.4-R0.1-SNAPSHOT</version>
+            <groupId>xyz.refinedev.spigot</groupId>
+            <artifactId>Carbon-Server</artifactId>
+            <version>1.8.8-R0.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/server.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lunarclient</groupId>
+            <artifactId>bukkitapi</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/lcapi.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.viaversion</groupId>
+            <artifactId>viaversion-api</artifactId>
+            <version>4.7.0</version>
             <scope>provided</scope>
         </dependency>
 
