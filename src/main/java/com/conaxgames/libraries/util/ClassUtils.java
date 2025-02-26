@@ -27,7 +27,7 @@ public final class ClassUtils {
                 .getAllClasses()
                 .stream()
                 .filter(clazz -> clazz.getPackageName().equalsIgnoreCase(packageName))
-                .filter(clazz -> isTopLevel && clazz.isTopLevel())
+                .filter(clazz -> !isTopLevel || !clazz.getName().contains("$"))
                 .map(ClassPath.ClassInfo::load)
                 .collect(Collectors.toSet());
     }

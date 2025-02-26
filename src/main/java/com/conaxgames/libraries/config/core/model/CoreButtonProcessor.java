@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -153,8 +154,10 @@ public class CoreButtonProcessor {
 
                 case "EMPTY_INVENTORY": {
                     if (type.equalsIgnoreCase("EMPTY_INVENTORY")) {
-                        if (!player.getInventory().isEmpty())
-                            denial.set(new CoreProcessorDenial(CC.RED + "You need an empty inventory to use this..."));
+                        for(ItemStack item : player.getInventory().getContents()) {
+                            if(item != null)
+                                denial.set(new CoreProcessorDenial(CC.RED + "You need an empty inventory to use this..."));
+                        }
                     }
                     break;
                 }

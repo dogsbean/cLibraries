@@ -225,7 +225,7 @@ public class ItemBuilderUtil {
     }
 
     public static ItemMeta setUnbreakable(ItemMeta meta, boolean value) {
-        meta.setUnbreakable(value); // Default behavior (1.20 NMS)
+        meta.spigot().setUnbreakable(value);
         return meta;
     }
 
@@ -252,17 +252,8 @@ public class ItemBuilderUtil {
         return this;
     }
 
-    public ItemBuilderUtil setCustomModelData(int modelData) {
-        final ItemMeta meta = this.is.getItemMeta();
-        if (meta != null) {
-            meta.setCustomModelData(modelData);
-        }
-        this.is.setItemMeta(meta);
-        return this;
-    }
-
     public ItemBuilderUtil setSkin(String texture) {
-        if (is.getType() == Material.PLAYER_HEAD) {
+        if (is.getType() == Material.SKULL_ITEM && is.getDurability() == 3) {
             final SkullMeta meta = (SkullMeta) is.getItemMeta();
             if (meta != null) {
                 GameProfile profile = new GameProfile(UUID.randomUUID(), null);
